@@ -72,21 +72,6 @@ class Database():
 
         return job
 
-    def set_processing(self, job_id):
-        """Change the processing flag so other workers know not
-        to take this one.
-
-        Args:
-            job_id (string): The Mongo ObjectId of the job
-        """
-        self.collection.jobs.update_one({
-            '_id': job_id
-        }, {
-            '$set': {
-                'processing': 1
-            }
-        }, upsert=False)
-
     def score_job(self, job_id, metrics):
         """Update a job with its scoring metrics.
 
